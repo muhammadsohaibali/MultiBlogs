@@ -21,38 +21,63 @@ MultiBlogs is a simple blog platform built with HTML, CSS, and JavaScript, using
 
 ## Project Structure
 
-```
 /MultiBlogs
+├── /public
+│ ├── /assets
+│ │ ├── /css
+│ │ │ ├── blog.css
+│ │ │ ├── blogspage.css
+│ │ │ ├── confirmation.css
+│ │ │ ├── me.css
+│ │ │ ├── newblog.css
+│ │ │ ├── structure.css
+│ │ │ └── user.css
+│ │ └── /js
+│ │ ├── blog.js
+│ │ ├── user.js
+│ │ └── /templates
+│ │ └── blogTemplates.js
+│ │
+│ ├── /auth
+│ │ ├── /new
+│ │ │ └── index.html
+│ │ └── index.html
+│ │
+│ ├── /blog
+│ │ ├── /new
+│ │ │ └── index.html
+│ │ └── index.html
+│ │
+│ ├── /me
+│ │ └── index.html
+│ │
+│ └── index.html
 │
 ├── /src
-│   ├── blog_db.json         # Blog database (used with JSON Server)
-│   ├── /assets              # Images, fonts, icons, etc.
-│   └── /js                  # All JavaScript files (UI + API handlers)
+│ └── blog_db.json
 │
-├── index.html               # Landing Page (Blog list)
-├── blog.html                # Blog detail page
-├── register.html            # User registration page
-├── login.html               # User login page
-├── ex.html                  # Example or test page (optional)
-├── styles.css               # Main CSS file
-├── .gitignore               # Git ignore rules (e.g., node_modules/)
-└── README.md                # Project documentation (this file)
-```
+├── .gitignore
+├── package.json
+├── package-lock.json
+└── README.md
 
 ## How to Run
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/muhammadsohaibali/MultiBlogs.git
    cd MultiBlogs
    ```
 
 2. Install JSON Server globally (if not already installed):
+
    ```bash
    npm install -g json-server
    ```
 
 3. Start JSON Server:
+
    ```bash
    json-server --watch src/blog_db.json --port 3000
    ```
@@ -69,4 +94,7 @@ MultiBlogs is a simple blog platform built with HTML, CSS, and JavaScript, using
 Developed by Muhammad Sohaib Ali
 
 [GitHub Repository](https://github.com/muhammadsohaibali/MultiBlogs)
+
+```
+
 ```
