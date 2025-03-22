@@ -99,8 +99,8 @@ MultiBlogs is a simple blog platform built with HTML, CSS, and JavaScript, using
 
 Developed by Muhammad Sohaib Ali
 
+<!-- ``` -->
 [GitHub Repository](https://github.com/muhammadsohaibali/MultiBlogs)
-
 ```
 
-```
+
