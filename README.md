@@ -9,10 +9,8 @@ MultiBlogs is a simple blog platform built with HTML, CSS, and JavaScript, using
 - Delete existing blog posts with a confirmation prompt
 - User registration and login system using local JSON database
 - Form validation with custom error messages
-- Display blog post metadata like author and date
-- Universal confirmation modal for actions like delete
 - LocalStorage session handling for logged-in users
-- Fully responsive and dark-themed UI
+- Fully responsive UI
 
 ## Technologies Used
 
@@ -65,14 +63,6 @@ MultiBlogs is a simple blog platform built with HTML, CSS, and JavaScript, using
 
 - This is a front-end project using JSON Server as a mock backend.
 - Make sure to update API endpoint URLs to match your local JSON Server URL (e.g., `http://localhost:3000/`).
-- Do not push large folders like `node_modules/` to GitHub. Use a `.gitignore` file.
-
-## Future Improvements
-
-- Add blog editing functionality
-- Implement JWT authentication
-- Add pagination to blog lists
-- Deploy to GitHub Pages or Vercel
 
 ## Author
 
