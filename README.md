@@ -21,6 +21,7 @@ MultiBlogs is a simple blog platform built with HTML, CSS, and JavaScript, using
 
 ## Project Structure
 
+```
 /MultiBlogs
 ├── /public
 │ ├── /assets
@@ -60,6 +61,7 @@ MultiBlogs is a simple blog platform built with HTML, CSS, and JavaScript, using
 ├── package.json
 ├── package-lock.json
 └── README.md
+```
 
 ## How to Run
 
