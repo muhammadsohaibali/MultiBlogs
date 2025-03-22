@@ -89,11 +89,6 @@ MultiBlogs is a simple blog platform built with HTML, CSS, and JavaScript, using
    ```
    http://localhost:3000/
    ```
-   - The frontend will load from `/public/index.html`
-   - JSON Server API will run at:
-     ```
-     http://localhost:3000/blogs
-     ```
 
 ## Notes
 
