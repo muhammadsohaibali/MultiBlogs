@@ -63,28 +63,37 @@ MultiBlogs is a simple blog platform built with HTML, CSS, and JavaScript, using
 └── README.md
 ```
 
-## How to Run
+## Getting Started
 
-1. Clone this repository:
+1. **Clone this repository:**
 
    ```bash
    git clone https://github.com/muhammadsohaibali/MultiBlogs.git
    cd MultiBlogs
    ```
 
-2. Install JSON Server globally (if not already installed):
+2. **Install dependencies:**
 
    ```bash
-   npm install -g json-server
+   npm install
    ```
 
-3. Start JSON Server:
+3. **Start the server (API + Static Files):**
 
    ```bash
-   json-server --watch src/blog_db.json --port 3000
+   npm start
    ```
 
-4. Open `index.html` in your browser to view the project.
+4. **Open in Browser:**
+   Visit:
+   ```
+   http://localhost:3000/
+   ```
+   - The frontend will load from `/public/index.html`
+   - JSON Server API will run at:
+     ```
+     http://localhost:3000/blogs
+     ```
 
 ## Notes
 
