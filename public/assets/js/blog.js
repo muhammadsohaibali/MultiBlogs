@@ -1,0 +1,69 @@
+if (!localStorage.getItem('user')) location.href = '/auth'
+else getElbyId('welcome-text').innerHTML = localStorage.getItem('user');
+
+const blogs = {
+    blog: async (id) => {
+        getElbyId("blog-body").innerHTML = renderBlog(await (await fetch(`/blogs/${id}`)).json())
+    },
+    loadAll: async () => {
+        getElbyId('container').innerHTML = [...await (await fetch('/blogs')).json()]
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            .map(x => blogBoxTemplate(x)).join('');
+    },
+    userBlogs: async () => {
+        getElbyId('blogs-section').innerHTML = [...await (await fetch('/blogs')).json()]
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            .filter(blog => blog.author === localStorage.getItem('user'))
+            .map(x => renderUserBlog(x)).join('');
+        getElbyId('top-section').innerHTML = renderUserInfo([...await (await fetch('/users')).json()]
+            .find(x => x.fullname === localStorage.getItem('user')) ? [...await (await fetch('/users')).json()]
+                .find(x => x.fullname === localStorage.getItem('user')) : window.location.href = '/auth/');
+    },
+    create: async () => {
+        await fetch("http://localhost:3000/blogs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id: `${[...await (await fetch("http://localhost:3000/blogs")).json()].at(-1).id + 1}`,
+                author: cap(localStorage.getItem('user')),
+                title: getElbyId('title').value,
+                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+                timestamp: new Date().toISOString(),
+                mainText: getElbyId('mainText').value,
+                content: getElbyId("blogContent").value.split('\n')
+                    .map(l => {
+                        l = l.trim();
+                        if (!l) return null;
+                        if (l.startsWith('# ')) return { type: "heading", level: 1, text: l.substring(2) };
+                        if (l.startsWith('## ')) return { type: "heading", level: 2, text: l.substring(3) };
+                        return { type: "paragraph", text: l };
+                    }).filter(Boolean)
+
+            })
+        }).then(res => { res.ok ? window.location.href = '/' : console.error(res.json()) });
+    },
+    delete: async (title) => {
+        showConfirm(`Do You Want To Delete:<br> <strong>${title}</strong>`, async () => {
+            await fetch(`http://localhost:3000/blogs/${id}`, { method: 'DELETE' })
+                .then(() => blogs.userBlogs())
+        })
+    }
+}
+
+function cap(str) {
+    return str.split(' ').map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
+}
+
+window.addEventListener("DOMContentLoaded", async () => {
+    getElbyId('container') &&
+        await blogs.loadAll().then(() => getElbyId('loader-overlay').style.display = 'none')
+    getElbyId("saveBlogBtn") &&
+        getElbyId("saveBlogBtn").addEventListener('click', async () => await blogs.create())
+    getElbyId("blog-body") &&
+        await blogs.blog(new URLSearchParams(window.location.search).get('q'))
+            .then(() => getElbyId('loader-overlay').style.display = 'none')
+    getElbyId('blogs-section') &&
+        await blogs.userBlogs().then(() => getElbyId('loader-overlay').style.display = 'none')
+})

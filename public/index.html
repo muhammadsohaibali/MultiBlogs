@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/assets/css/confirmation.css">
+    <link rel="stylesheet" href="/assets/css/structure.css">
+    <link rel="stylesheet" href="/assets/css/blogspage.css">
+    <title>Blogs - Home</title>
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="loader-overlay" class="loader-overlay">
+        <span class="loader"></span>
+    </div>
+    <!-- Navbar -->
+    <header class="header-div">
+        <div class="container nav-container">
+            <div class="logo-container" onclick="window.location.href = `/`" style="cursor: pointer;">
+                <h1 class="logo">MultiBlogs</h1>
+                <small class="subtitle">
+                    Welcome <p id="welcome-text"></p>
+                </small>
+            </div>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/me">Me</a>
+                <a href="/blog/new/">Create</a>
+                <a id="logout-btn" onclick="auth.logout()">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- Blog Feed -->
+    <main>
+        <div class="container" id="container">
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 MultiBlogs. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="/assets/js/templates/blogTemplates.js"></script>
+    <script src="/assets/js/user.js"></script>
+    <script src="/assets/js/blog.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f7f9;
+  color: #333;
+}
+
+.top-section {
+  background: #fff;
+  padding: 20px 40px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.user-info h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #ff4b4b;
+}
+
+.user-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.logout-btn {
+  background: #ff4b4b;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #e03b3b;
+}
+
+/* Additional Buttons */
+/* Buttons styling */
+.post-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.blog-post {
+    margin-top: 20px;
+}
+
+/* Edit Button */
+.edit-btn {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}

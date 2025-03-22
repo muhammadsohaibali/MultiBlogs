@@ -1,0 +1,402 @@
+{
+  "blogs": [
+    {
+      "id": "1",
+      "author": "Faizan Ahmed",
+      "title": "The Charm of Lahore's Old City",
+      "date": "March 22, 2025",
+      "timestamp": "2025-03-22T12:20:59.950Z",
+      "mainText": "Exploring Lahore's walled city offers an unforgettable dive into history, culture, and vibrant life.",
+      "content": [
+        {
+          "type": "heading",
+          "level": 1,
+          "text": "The Walled City's Rich Heritage"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A Glimpse Into Mughal Glory"
+        },
+        {
+          "type": "paragraph",
+          "text": "The walled city of Lahore, also known as Androon Sheher, is a maze of narrow alleys, bustling bazaars, and grand Mughal-era monuments."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Architectural Marvels of the Past"
+        },
+        {
+          "type": "paragraph",
+          "text": "Badshahi Mosque and Lahore Fort stand as timeless examples of Mughal splendor, offering intricate carvings and breathtaking courtyards."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Street Food and Local Culture"
+        },
+        {
+          "type": "paragraph",
+          "text": "No visit is complete without savoring Lahori food at Phajjay ke Paye and Taj Mahal Sweets. The hustle and bustle around Heera Mandi brings back stories of art and tradition."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Festivals and Nightlife"
+        },
+        {
+          "type": "paragraph",
+          "text": "The annual Basant festival fills the skies with kites, while evenings in the old city echo with qawwali sessions and street performances."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "author": "Sana Gul",
+      "title": "Karachi's Coastal Life",
+      "date": "March 22, 2025",
+      "timestamp": "2025-03-22T12:22:03.452Z",
+      "mainText": "Karachi, a city that blends chaos with calmness by the Arabian Sea.",
+      "content": [
+        {
+          "type": "heading",
+          "level": 1,
+          "text": "The Vibrance of Karachi"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Life at the Edge of the Sea"
+        },
+        {
+          "type": "paragraph",
+          "text": "Karachi’s Clifton Beach is a magnet for families, kite flyers, and camel riders."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Hidden Coastal Treasures"
+        },
+        {
+          "type": "paragraph",
+          "text": "Secluded beaches like Sandspit and French Beach offer serenity to those escaping the urban rush."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Karachi's Night Markets"
+        },
+        {
+          "type": "paragraph",
+          "text": "Food streets like Burns Road and Boat Basin come alive at night with a variety of flavors ranging from spicy chaat to mouth-watering BBQ."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Historic Karachi"
+        },
+        {
+          "type": "paragraph",
+          "text": "The Mohatta Palace, Frere Hall, and Quaid’s Mausoleum reflect the rich history amidst modern skyscrapers."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "author": "Ayesha Tariq",
+      "title": "Islamabad - The Green Capital",
+      "date": "March 22, 2025",
+      "timestamp": "2025-03-22T12:24:10.646Z",
+      "mainText": "Islamabad stands tall as Pakistan’s most serene and organized metropolis.",
+      "content": [
+        {
+          "type": "heading",
+          "level": 1,
+          "text": "The City of Green Spaces"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Margalla Hills and Beyond"
+        },
+        {
+          "type": "paragraph",
+          "text": "Hiking trails like Trail 5 and Pir Sohawa are favorites among locals and tourists alike."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Urban Architecture & Culture"
+        },
+        {
+          "type": "paragraph",
+          "text": "Faisal Mosque, Daman-e-Koh, and Pakistan Monument showcase Islamabad’s modern yet cultural side."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Eco-Friendly Lifestyle"
+        },
+        {
+          "type": "paragraph",
+          "text": "With its cycling tracks, parks, and eco-friendly initiatives, Islamabad promotes sustainable living."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Cafes and Social Spots"
+        },
+        {
+          "type": "paragraph",
+          "text": "From cozy cafes in F-7 to scenic spots at Rawal Lake, Islamabad offers a laid-back yet vibrant lifestyle."
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "author": "Ayesha Tariq",
+      "title": "Cultural Colors of Multan",
+      "date": "March 22, 2025",
+      "timestamp": "2025-03-22T12:27:09.643Z",
+      "mainText": "Multan, the city of saints, is an intricate blend of spiritual history and vibrant markets.",
+      "content": [
+        {
+          "type": "heading",
+          "level": 1,
+          "text": "The Spiritual Hub"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Mystical Shrines and Saints"
+        },
+        {
+          "type": "paragraph",
+          "text": "Shrines like Shah Rukn-e-Alam and Bahauddin Zakariya attract devotees and history buffs alike."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Bazaar Culture"
+        },
+        {
+          "type": "paragraph",
+          "text": "Hussain Agahi Bazaar offers everything from ajrak to handwoven khaddar and traditional jewelry."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Craftsmanship and Cuisine"
+        },
+        {
+          "type": "paragraph",
+          "text": "Multani pottery and camel skin lamps are sought after globally. And don’t miss the legendary Multani Sohan Halwa."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Festivals & Gatherings"
+        },
+        {
+          "type": "paragraph",
+          "text": "Urs festivals and Sufi music gatherings fill the city with soulful melodies and colorful traditions every year."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "author": "Sohaib Ali",
+      "title": "The Serenity of Hunza Valley",
+      "date": "March 23, 2025",
+      "timestamp": "2025-03-22T09:15:30.123Z",
+      "mainText": "Nestled among the mighty Karakoram ranges, Hunza Valley is a paradise for nature lovers and adventurers alike.",
+      "content": [
+        {
+          "type": "heading",
+          "level": 1,
+          "text": "A Northern Jewel"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Landscapes That Mesmerize"
+        },
+        {
+          "type": "paragraph",
+          "text": "Snow-capped peaks, emerald lakes, and lush green terraces make Hunza a feast for the eyes and soul."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Rich Culture and History"
+        },
+        {
+          "type": "paragraph",
+          "text": "Baltit Fort and Altit Fort reflect the ancient heritage of Hunza, standing tall with stories of the past."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Local Delights"
+        },
+        {
+          "type": "paragraph",
+          "text": "The valley's apricots, walnut cakes, and yak meat dishes are a must-try for every visitor."
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "author": "Ali Zaman",
+      "title": "Skardu - Gateway to the Mighty K2",
+      "date": "March 23, 2025",
+      "timestamp": "2025-03-22T10:45:11.456Z",
+      "mainText": "Skardu is the crown jewel of Gilgit-Baltistan, offering unparalleled access to Pakistan's highest peaks and pristine landscapes.",
+      "content": [
+        {
+          "type": "heading",
+          "level": 1,
+          "text": "Adventure Capital"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Base Camp for Trekkers"
+        },
+        {
+          "type": "paragraph",
+          "text": "Trekkers worldwide visit Skardu as the starting point for expeditions to K2, Broad Peak, and other Karakoram giants."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Serene Lakes and Valleys"
+        },
+        {
+          "type": "paragraph",
+          "text": "Shangrila Lake and Deosai Plains offer tranquility, wildlife sightings, and surreal views."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Cultural Diversity"
+        },
+        {
+          "type": "paragraph",
+          "text": "Skardu’s Balti people are known for their warmth, vibrant festivals, and Tibetan-influenced cuisine."
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "author": "Sohaib Ali",
+      "title": "Gwadar - The Emerging Port City",
+      "date": "March 23, 2025",
+      "timestamp": "2025-03-22T13:05:50.789Z",
+      "mainText": "Gwadar is Pakistan's rising star, blending strategic importance with scenic coastal beauty.",
+      "content": [
+        {
+          "type": "heading",
+          "level": 1,
+          "text": "A City on the Rise"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "CPEC’s Backbone"
+        },
+        {
+          "type": "paragraph",
+          "text": "Gwadar Port is transforming into a regional trade hub, thanks to the China-Pakistan Economic Corridor (CPEC)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Beaches and Marine Life"
+        },
+        {
+          "type": "paragraph",
+          "text": "The untouched beaches of Gwadar offer glimpses of dolphins, rare fish, and tranquil sunsets."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Local Charm"
+        },
+        {
+          "type": "paragraph",
+          "text": "Fishermen, handicrafts, and Balochi traditions make Gwadar culturally rich beyond its economic prospects."
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "author": "WAO KIA BAAT HY",
+      "title": "Mera Pehla Blog",
+      "date": "March 22, 2025",
+      "timestamp": "2025-03-22T18:28:30.393Z",
+      "mainText": "me pau pau hoon",
+      "content": [
+        {
+          "type": "heading",
+          "level": 1,
+          "text": "testing bari heading"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "testing choti heading"
+        },
+        {
+          "type": "paragraph",
+          "text": "fuzool saa lambaaa saa texttt"
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "fullname": "Faizan Ahmed",
+      "username": "faizanahmed",
+      "password": "lahore123"
+    },
+    {
+      "id": "2",
+      "fullname": "Sana Gul",
+      "username": "sanagul",
+      "password": "karachi456"
+    },
+    {
+      "id": "3",
+      "fullname": "Bilal Khan",
+      "username": "bilalkhan",
+      "password": "isb789"
+    },
+    {
+      "id": "4",
+      "fullname": "Ayesha Tariq",
+      "username": "ayeshatariq",
+      "password": "multanabc"
+    },
+    {
+      "id": "5",
+      "fullname": "Sohaib Ali",
+      "username": "sohaib",
+      "password": "1234"
+    },
+    {
+      "id": 6,
+      "username": "ali",
+      "password": "1111",
+      "fullname": "Ali Zaman"
+    },
+    {
+      "id": 7,
+      "username": "wao",
+      "password": "waah",
+      "fullname": "WAO KIA BAAT HY"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f9;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+.container-new {
+  min-width: 300px;
+  width: 70vw;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.new-blog-head {
+  color: #f45b5b;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+  background: #fff;
+  box-shadow: 0 0 0 1px #ddd;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  box-shadow: 0 0 0 2px #f45b5b;
+}
+
+textarea {
+  min-height: 150px;
+  height: 200px;
+}
+
+button {
+  display: inline-block;
+  margin-top: 20px;
+  background: #f45b5b;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #e14b4b;
+}
