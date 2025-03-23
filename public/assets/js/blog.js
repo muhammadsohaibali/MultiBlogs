@@ -11,28 +11,28 @@ function cap(str) {
 
 const blogs = {
     blog: async (id) => {
-        getElbyId("blog-body").innerHTML = renderBlog(await (await fetch(`/blogs/${id}`)).json())
+        getElbyId("blog-body").innerHTML = renderBlog(await (await fetch(`${baseURL}/blogs/${id}`)).json())
     },
     loadAll: async () => {
-        getElbyId('container').innerHTML = [...await (await fetch('/blogs')).json()]
+        getElbyId('container').innerHTML = [...await (await fetch(`${baseURL}/blogs`)).json()]
             .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
             .map(x => blogBoxTemplate(x)).join('');
     },
     userBlogs: async () => {
-        getElbyId('blogs-section').innerHTML = [...await (await fetch('/blogs')).json()]
+        getElbyId('blogs-section').innerHTML = [...await (await fetch(`${baseURL}/blogs`)).json()]
             .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
             .filter(blog => blog.author === localStorage.getItem('user'))
             .map(x => renderUserBlog(x)).join('');
-        getElbyId('top-section').innerHTML = renderUserInfo([...await (await fetch('/users')).json()]
-            .find(x => x.fullname === localStorage.getItem('user')) ? [...await (await fetch('/users')).json()]
+        getElbyId('top-section').innerHTML = renderUserInfo([...await (await fetch(`${baseURL}/users`)).json()]
+            .find(x => x.fullname === localStorage.getItem('user')) ? [...await (await fetch(`${baseURL}/users`)).json()]
                 .find(x => x.fullname === localStorage.getItem('user')) : goTo('/auth/'));
     },
     create: async () => {
-        await fetch("/blogs", {
+        await fetch(`${baseURL}/blogs`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                id: `${[...await (await fetch("/blogs")).json()].at(-1).id + 1}`,
+                id: `${[...await (await fetch(`${baseURL}/blogs`)).json()].at(-1).id + 1}`,
                 author: cap(localStorage.getItem('user')),
                 title: getElbyId('title').value,
                 date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
@@ -52,15 +52,15 @@ const blogs = {
     },
     delete: async (id, title) => {
         showConfirm(`Do You Want To Delete:<br> <strong>${title}</strong>`, async () => {
-            await fetch(`/blogs/${id}`, { method: 'DELETE' })
+            await fetch(`${baseURL}/blogs/${id}`, { method: 'DELETE' })
                 .then(() => blogs.userBlogs())
         })
     },
     renderEdit: async (id, callbackc) => {
-        if (!localStorage.getItem('user') || ![...await (await fetch('/blogs')).json()]
+        if (!localStorage.getItem('user') || ![...await (await fetch(`${baseURL}/blogs`)).json()]
             .filter(x => x.author === localStorage.getItem('user') && x.id === id).length) goTo('/');
         getElbyId('edit-blog').dataset.id = id;
-        fetch(`/blogs/${id}`)
+        fetch(`${baseURL}/blogs/${id}`)
             .then(res => res.json())
             .then(blog => {
                 document.getElementById('title').value = blog.title;
@@ -72,7 +72,7 @@ const blogs = {
             });
     },
     saveEdit: () => {
-        fetch(`/blogs/${getElbyId('edit-blog').dataset.id}`, {
+        fetch(`${baseURL}/blogs/${getElbyId('edit-blog').dataset.id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

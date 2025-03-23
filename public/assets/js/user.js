@@ -1,4 +1,5 @@
 const [goTo, getElbyId] = [(path) => window.location.href = path, (id) => document.getElementById(id)];
+const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '/api';
 
 const handleAuth = (event) => {
     event.preventDefault();
@@ -15,7 +16,7 @@ const auth = {
         if (user.trim().length < 3) return userInp.focus(), userInp.value = '', userInp.placeholder = 'Minimum 3 letters required';
         if (!pass.trim()) return passInp.focus(), passInp.placeholder = 'Password Cannot Be Empty';
         if (pass.trim().length < 4) return passInp.focus(), passInp.value = '', passInp.placeholder = 'Minimum 4 letters required';
-        const users = await (await fetch('/users')).json();
+        const users = await (await fetch(`${baseURL}/users`)).json();
         const userData = users.find(res => res.username === user.toLowerCase().trim());
         if (!userData) return userInp.focus(), userInp.value = '', userInp.placeholder = 'User Not Found';
         if (userData.password !== pass) return passInp.focus(), passInp.value = '', passInp.placeholder = 'Incorrect Password';
@@ -28,12 +29,12 @@ const auth = {
         if (user.trim().length < 3) return userInp.focus(), userInp.value = '', userInp.placeholder = 'Minimum 3 letters required';
         if (!fullname.trim()) return nameInp.focus(), nameInp.placeholder = 'Full Name Cannot Be Empty';
         if (fullname.trim().length < 3) return nameInp.focus(), nameInp.value = '', nameInp.placeholder = 'Minimum 3 letters required';
-        const users = await (await fetch('/users')).json();
+        const users = await (await fetch(`${baseURL}/users`)).json();
         if (users.find(res => res.username === user.trim())) return userInp.focus(), userInp.value = '', userInp.placeholder = 'Username Is Not Available';
         if (!pass.trim()) return passInp.focus(), passInp.placeholder = 'Password Cannot Be Empty';
         if (pass.trim().length < 4) return passInp.focus(), passInp.value = '', passInp.placeholder = 'Minimum 4 letters required';
         const newId = users.at(-1)?.id + 1 || 1;
-        const res = await fetch("/users", {
+        const res = await fetch(`${baseURL}/users`, {
             method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: newId, username: user.trim(), password: pass.trim(), fullname: fullname.trim() })
         });
