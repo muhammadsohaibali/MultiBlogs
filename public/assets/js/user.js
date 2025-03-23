@@ -1,5 +1,5 @@
 const [goTo, getElbyId] = [(path) => window.location.href = path, (id) => document.getElementById(id)];
-const baseURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://blogs-beryl-kappa.vercel.app/api';
+const baseURL = ['localhost', '192.168.100.4'].includes(window.location.hostname) ? 'http://192.168.100.4:3000' : '/api';
 
 const handleAuth = (event) => {
     event.preventDefault();
