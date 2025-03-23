@@ -1,6 +1,8 @@
 if (!localStorage.getItem('user')) location.href = '/auth'
 else getElbyId('welcome-text').innerHTML = localStorage.getItem('user');
 
+const hideLoader = () => getElbyId('loader-overlay').style.display = 'none';
+
 const blogs = {
     blog: async (id) => {
         getElbyId("blog-body").innerHTML = renderBlog(await (await fetch(`/blogs/${id}`)).json())
@@ -17,14 +19,14 @@ const blogs = {
             .map(x => renderUserBlog(x)).join('');
         getElbyId('top-section').innerHTML = renderUserInfo([...await (await fetch('/users')).json()]
             .find(x => x.fullname === localStorage.getItem('user')) ? [...await (await fetch('/users')).json()]
-                .find(x => x.fullname === localStorage.getItem('user')) : window.location.href = '/auth/');
+                .find(x => x.fullname === localStorage.getItem('user')) : goTo('/auth/'));
     },
     create: async () => {
-        await fetch("http://localhost:3000/blogs", {
+        await fetch("/blogs", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                id: `${[...await (await fetch("http://localhost:3000/blogs")).json()].at(-1).id + 1}`,
+                id: `${[...await (await fetch("/blogs")).json()].at(-1).id + 1}`,
                 author: cap(localStorage.getItem('user')),
                 title: getElbyId('title').value,
                 date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
@@ -40,17 +42,17 @@ const blogs = {
                     }).filter(Boolean)
 
             })
-        }).then(res => { res.ok ? window.location.href = '/' : console.error(res.json()) });
+        }).then(res => { res.ok ? goTo('/') : console.error(res.json()) });
     },
     delete: async (id, title) => {
         showConfirm(`Do You Want To Delete:<br> <strong>${title}</strong>`, async () => {
-            await fetch(`http://localhost:3000/blogs/${id}`, { method: 'DELETE' })
+            await fetch(`/blogs/${id}`, { method: 'DELETE' })
                 .then(() => blogs.userBlogs())
         })
     },
     renderEdit: async (id, callbackc) => {
         if (!localStorage.getItem('user') || ![...await (await fetch('/blogs')).json()]
-            .filter(x => x.author === localStorage.getItem('user') && x.id === id).length) window.location.href = '/';
+            .filter(x => x.author === localStorage.getItem('user') && x.id === id).length) goTo('/');
         getElbyId('edit-blog').dataset.id = id;
         fetch(`/blogs/${id}`)
             .then(res => res.json())
@@ -64,7 +66,7 @@ const blogs = {
             });
     },
     saveEdit: () => {
-        fetch(`http://localhost:3000/blogs/${getElbyId('edit-blog').dataset.id}`, {
+        fetch(`/blogs/${getElbyId('edit-blog').dataset.id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -80,7 +82,7 @@ const blogs = {
                         return { type: "paragraph", text: l };
                     }).filter(Boolean)
             })
-        }).then(res => { if (res.ok) window.location.href = '/' })
+        }).then(res => { if (res.ok) goTo('/') })
     }
 }
 
@@ -92,15 +94,15 @@ function cap(str) {
 
 window.addEventListener("DOMContentLoaded", async () => {
     getElbyId('container') &&
-        await blogs.loadAll().then(() => getElbyId('loader-overlay').style.display = 'none')
+        await blogs.loadAll().then(() => hideLoader())
     getElbyId("saveBlogBtn") &&
         getElbyId("saveBlogBtn").addEventListener('click', async () => await blogs.create())
     getElbyId("blog-body") &&
         await blogs.blog(new URLSearchParams(window.location.search).get('q'))
-            .then(() => getElbyId('loader-overlay').style.display = 'none')
+            .then(() => hideLoader())
     getElbyId('blogs-section') &&
-        await blogs.userBlogs().then(() => getElbyId('loader-overlay').style.display = 'none')
+        await blogs.userBlogs().then(() => hideLoader())
     getElbyId('edit-blog') &&
         await blogs.renderEdit(new URLSearchParams(window.location.search).get('id'),
-            () => getElbyId('loader-overlay').style.display = 'none')
+            () => hideLoader())
 })

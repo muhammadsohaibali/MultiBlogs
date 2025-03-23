@@ -14,18 +14,10 @@ const showConfirm = (message, onConfirm, onCancel) => {
                 <button class="confirm-btn">Yes</button>
                 <button class="cancel-btn">No</button>
             </div>
-        </div>
-    `;
+        </div>`;
     document.body.appendChild(box);
-
-    box.querySelector('.confirm-btn').onclick = () => {
-        onConfirm();
-        box.remove();
-    };
-    box.querySelector('.cancel-btn').onclick = () => {
-        if (onCancel) onCancel();
-        box.remove();
-    };
+    box.querySelector('.confirm-btn').onclick = () => { onConfirm(); box.remove(); };
+    box.querySelector('.cancel-btn').onclick = () => { if (onCancel) onCancel(); box.remove(); };
 };
 
 // Templates

@@ -1,5 +1,4 @@
-const clg = console.log
-const getElbyId = (id) => document.getElementById(id)
+const [goTo, getElbyId] = [(path) => window.location.href = path, (id) => document.getElementById(id)];
 
 const handleAuth = (event) => {
     event.preventDefault();
@@ -11,54 +10,39 @@ const handleAuth = (event) => {
 
 const auth = {
     login: async (user, pass) => {
-        let userData;
         const [userInp, passInp] = [getElbyId('username'), getElbyId('password')];
-        user.trim()
-            ? user.trim().length >= 3
-                ? pass.trim()
-                    ? pass.trim().length >= 4
-                        ? ([...await (await fetch('/users')).json()].forEach(res => { res.username === user.toLowerCase().trim() && (userData = res) }),
-                            userData ? userData?.password === pass
-                                ? (localStorage.setItem('user', userData.fullname), window.location.href = '/')
-                                : (passInp.focus(), passInp.value = '', passInp.placeholder = 'Incorrect Password')
-                                : (userInp.focus(), userInp.value = '', userInp.placeholder = 'User Not Found')
-                        )
-                        : (passInp.focus(), passInp.value = '', passInp.placeholder = 'Minimum 4 letters required')
-                    : (passInp.focus(), passInp.value = '', passInp.placeholder = 'Password Cannot Be Empty')
-                : (userInp.focus(), userInp.value = '', userInp.placeholder = 'Minimum 3 letters required')
-            : (userInp.focus(), userInp.value = '', userInp.placeholder = 'Username Cannot Be Empty')
+        if (!user.trim()) return userInp.focus(), userInp.placeholder = 'Username Cannot Be Empty';
+        if (user.trim().length < 3) return userInp.focus(), userInp.value = '', userInp.placeholder = 'Minimum 3 letters required';
+        if (!pass.trim()) return passInp.focus(), passInp.placeholder = 'Password Cannot Be Empty';
+        if (pass.trim().length < 4) return passInp.focus(), passInp.value = '', passInp.placeholder = 'Minimum 4 letters required';
+        const users = await (await fetch('/users')).json();
+        const userData = users.find(res => res.username === user.toLowerCase().trim());
+        if (!userData) return userInp.focus(), userInp.value = '', userInp.placeholder = 'User Not Found';
+        if (userData.password !== pass) return passInp.focus(), passInp.value = '', passInp.placeholder = 'Incorrect Password';
+        localStorage.setItem('user', userData.fullname);
+        goTo('/');
     },
     register: async (user, pass, fullname) => {
         const [userInp, passInp, nameInp] = [getElbyId('username'), getElbyId('password'), getElbyId('fullname')];
-        user.trim()
-            ? user.trim().length >= 3
-                ? fullname.trim()
-                    ? fullname.trim().length >= 3
-                        ? ![...await (await fetch('/users')).json()].find(res => res.username === user)
-                            ? pass.trim()
-                                ? pass.trim().length >= 4
-                                    ? await fetch("http://localhost:3000/users", {
-                                        method: "POST",
-                                        headers: { "Content-Type": "application/json" },
-                                        body: JSON.stringify({
-                                            id: [...await (await fetch("http://localhost:3000/users")).json()].at(-1).id + 1,
-                                            username: user.trim(),
-                                            password: pass.trim(),
-                                            fullname: fullname.trim()
-                                        })
-                                    }).then(res => res.ok
-                                        ? (localStorage.setItem('user', fullname.trim()), window.location.href = "/")
-                                        : (userInp.value = '', userInp.placeholder = 'Internal Server Error'))
-                                    : (passInp.focus(), passInp.value = '', passInp.placeholder = 'Minimum 4 letters required')
-                                : (passInp.focus(), passInp.value = '', passInp.placeholder = 'Password Cannot Be Empty')
-                            : (userInp.focus(), userInp.value = '', userInp.placeholder = 'Username Is Not Available')
-                        : (nameInp.focus(), nameInp.value = '', nameInp.placeholder = 'Minimum 3 letters required')
-                    : (nameInp.focus(), nameInp.value = '', nameInp.placeholder = 'Full Name Cannot Be Empty')
-                : (userInp.focus(), userInp.value = '', userInp.placeholder = 'Minimum 3 letters required')
-            : (userInp.focus(), userInp.value = '', userInp.placeholder = 'Username Cannot Be Empty');
-    }
-    ,
-    logout: () => { localStorage.removeItem('user'); window.location.href = '/' }
+
+        if (!user.trim()) return userInp.focus(), userInp.placeholder = 'Username Cannot Be Empty';
+        if (user.trim().length < 3) return userInp.focus(), userInp.value = '', userInp.placeholder = 'Minimum 3 letters required';
+        if (!fullname.trim()) return nameInp.focus(), nameInp.placeholder = 'Full Name Cannot Be Empty';
+        if (fullname.trim().length < 3) return nameInp.focus(), nameInp.value = '', nameInp.placeholder = 'Minimum 3 letters required';
+        const users = await (await fetch('/users')).json();
+        if (users.find(res => res.username === user.trim())) return userInp.focus(), userInp.value = '', userInp.placeholder = 'Username Is Not Available';
+        if (!pass.trim()) return passInp.focus(), passInp.placeholder = 'Password Cannot Be Empty';
+        if (pass.trim().length < 4) return passInp.focus(), passInp.value = '', passInp.placeholder = 'Minimum 4 letters required';
+        const newId = users.at(-1)?.id + 1 || 1;
+        const res = await fetch("/users", {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: newId, username: user.trim(), password: pass.trim(), fullname: fullname.trim() })
+        });
+        if (!res.ok) return userInp.value = '', userInp.placeholder = 'Internal Server Error';
+        localStorage.setItem('user', fullname.trim());
+        goTo("/");
+    },
+    logout: () => { localStorage.removeItem('user'); goTo('/') }
 }
 
 // Event Listners
