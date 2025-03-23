@@ -329,30 +329,6 @@
           "text": "Fishermen, handicrafts, and Balochi traditions make Gwadar culturally rich beyond its economic prospects."
         }
       ]
-    },
-    {
-      "id": "8",
-      "author": "WAO KIA BAAT HY",
-      "title": "Mera Pehla Blog",
-      "date": "March 22, 2025",
-      "timestamp": "2025-03-22T18:28:30.393Z",
-      "mainText": "me pau pau hoon",
-      "content": [
-        {
-          "type": "heading",
-          "level": 1,
-          "text": "testing bari heading"
-        },
-        {
-          "type": "heading",
-          "level": 2,
-          "text": "testing choti heading"
-        },
-        {
-          "type": "paragraph",
-          "text": "fuzool saa lambaaa saa texttt"
-        }
-      ]
     }
   ],
   "users": [
@@ -387,16 +363,10 @@
       "password": "1234"
     },
     {
-      "id": 6,
+      "id": "6",
       "username": "ali",
       "password": "1111",
       "fullname": "Ali Zaman"
-    },
-    {
-      "id": 7,
-      "username": "wao",
-      "password": "waah",
-      "fullname": "WAO KIA BAAT HY"
     }
   ]
 }

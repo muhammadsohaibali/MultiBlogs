@@ -84,8 +84,8 @@ const renderUserBlog = (blog) => {
     }).join('')}
             </div>
             <div class="post-actions">
-                <button class="edit-btn" data-id="${blog.id}">Edit Blog</button>
-                <button onclick='blogs.delete("${blog.title}")' class="delete-btn" data-id="${blog.id}">Delete Blog</button>
+                <button onclick='window.location.href = "/blog/edit/?id=${blog.id}"' class="edit-btn" data-id="${blog.id}">Edit Blog</button>
+                <button onclick='blogs.delete("${blog.id}" ,"${blog.title}")' class="delete-btn" data-id="${blog.id}">Delete Blog</button>
             </div>
         </article>
     `;

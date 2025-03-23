@@ -42,11 +42,45 @@ const blogs = {
             })
         }).then(res => { res.ok ? window.location.href = '/' : console.error(res.json()) });
     },
-    delete: async (title) => {
+    delete: async (id, title) => {
         showConfirm(`Do You Want To Delete:<br> <strong>${title}</strong>`, async () => {
             await fetch(`http://localhost:3000/blogs/${id}`, { method: 'DELETE' })
                 .then(() => blogs.userBlogs())
         })
+    },
+    renderEdit: async (id, callbackc) => {
+        if (!localStorage.getItem('user') || ![...await (await fetch('/blogs')).json()]
+            .filter(x => x.author === localStorage.getItem('user') && x.id === id).length) window.location.href = '/';
+        getElbyId('edit-blog').dataset.id = id;
+        fetch(`/blogs/${id}`)
+            .then(res => res.json())
+            .then(blog => {
+                document.getElementById('title').value = blog.title;
+                document.getElementById('mainText').value = blog.mainText;
+                document.getElementById('blogContent').value = blog.content
+                    .map(block => block.type === 'heading' ? `${'#'.repeat(block.level)} ${block.text}` : block.text)
+                    .join('\n\n');
+                callbackc();
+            });
+    },
+    saveEdit: () => {
+        fetch(`http://localhost:3000/blogs/${getElbyId('edit-blog').dataset.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: getElbyId('title').value,
+                mainText: getElbyId('mainText').value,
+                timestamp: new Date().toISOString(),
+                content: getElbyId("blogContent").value.split('\n')
+                    .map(l => {
+                        l = l.trim();
+                        if (!l) return null;
+                        if (l.startsWith('# ')) return { type: "heading", level: 1, text: l.substring(2) };
+                        if (l.startsWith('## ')) return { type: "heading", level: 2, text: l.substring(3) };
+                        return { type: "paragraph", text: l };
+                    }).filter(Boolean)
+            })
+        }).then(res => { if (res.ok) window.location.href = '/' })
     }
 }
 
@@ -66,4 +100,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             .then(() => getElbyId('loader-overlay').style.display = 'none')
     getElbyId('blogs-section') &&
         await blogs.userBlogs().then(() => getElbyId('loader-overlay').style.display = 'none')
+    getElbyId('edit-blog') &&
+        await blogs.renderEdit(new URLSearchParams(window.location.search).get('id'),
+            () => getElbyId('loader-overlay').style.display = 'none')
 })
