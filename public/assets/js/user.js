@@ -33,7 +33,7 @@ const auth = {
         if (users.find(res => res.username === user.trim())) return userInp.focus(), userInp.value = '', userInp.placeholder = 'Username Is Not Available';
         if (!pass.trim()) return passInp.focus(), passInp.placeholder = 'Password Cannot Be Empty';
         if (pass.trim().length < 4) return passInp.focus(), passInp.value = '', passInp.placeholder = 'Minimum 4 letters required';
-        const newId = users.at(-1)?.id + 1 || 1;
+        const newId = `${parseInt(users.at(-1)?.id) + 1}` || '1';
         const res = await fetch(`${baseURL}/users`, {
             method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: newId, username: user.trim(), password: pass.trim(), fullname: fullname.trim() })

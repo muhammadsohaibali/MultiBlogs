@@ -32,7 +32,7 @@ const blogs = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                id: `${[...await (await fetch(`${baseURL}/blogs`)).json()].at(-1).id + 1}`,
+                id: `${parseInt([...await (await fetch(`${baseURL}/blogs`)).json()].at(-1).id) + 1}` || '1',
                 author: cap(localStorage.getItem('user')),
                 title: getElbyId('title').value,
                 date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
