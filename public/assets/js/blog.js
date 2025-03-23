@@ -3,6 +3,12 @@ else getElbyId('welcome-text').innerHTML = localStorage.getItem('user');
 
 const hideLoader = () => getElbyId('loader-overlay').style.display = 'none';
 
+function cap(str) {
+    return str.split(' ').map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
+}
+
 const blogs = {
     blog: async (id) => {
         getElbyId("blog-body").innerHTML = renderBlog(await (await fetch(`/blogs/${id}`)).json())
@@ -84,12 +90,6 @@ const blogs = {
             })
         }).then(res => { if (res.ok) goTo('/') })
     }
-}
-
-function cap(str) {
-    return str.split(' ').map(word => {
-        return word.charAt(0).toUpperCase() + word.slice(1);
-    }).join(' ');
 }
 
 window.addEventListener("DOMContentLoaded", async () => {

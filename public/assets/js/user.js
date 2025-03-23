@@ -24,7 +24,6 @@ const auth = {
     },
     register: async (user, pass, fullname) => {
         const [userInp, passInp, nameInp] = [getElbyId('username'), getElbyId('password'), getElbyId('fullname')];
-
         if (!user.trim()) return userInp.focus(), userInp.placeholder = 'Username Cannot Be Empty';
         if (user.trim().length < 3) return userInp.focus(), userInp.value = '', userInp.placeholder = 'Minimum 3 letters required';
         if (!fullname.trim()) return nameInp.focus(), nameInp.placeholder = 'Full Name Cannot Be Empty';
@@ -45,7 +44,6 @@ const auth = {
     logout: () => { localStorage.removeItem('user'); goTo('/') }
 }
 
-// Event Listners
 document.getElementById("submit") &&
     document.getElementById("submit").addEventListener("click", handleAuth)
 document.getElementById("submit") &&
