@@ -1,13 +1,5 @@
-const jsonServer = require('json-server');
-const path = require('path');
+const blogData = require('../../src/blog_db.json');
 
-const server = jsonServer.create();
-const router = jsonServer.router(path.join(__dirname, '../../src/blog_db.json'));
-const middlewares = jsonServer.defaults();
-
-server.use(middlewares);
-server.use(router);
-
-module.exports = (req, res) => {
-    server(req, res);
-};
+export default function handler(req, res) {
+    res.status(200).json(blogData);
+}
