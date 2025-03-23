@@ -90,11 +90,6 @@ MultiBlogs is a simple blog platform built with HTML, CSS, and JavaScript, using
    http://localhost:3000/
    ```
 
-## Notes
-
-- This is a front-end project using JSON Server as a mock backend.
-- Make sure to update API endpoint URLs to match your local JSON Server URL (e.g., `http://localhost:3000/`).
-
 ## Author
 
 Developed by Muhammad Sohaib Ali
