@@ -1,5 +1,3 @@
 {
-  "version": 2,
-  "builds": [{ "src": "api/json.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/api/(.*)", "dest": "/api/json.js" }]
+  "rewrites": [{ "source": "/api/:match*", "destination": "/api/json.js" }]
 }
