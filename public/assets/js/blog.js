@@ -11,21 +11,25 @@ function cap(str) {
 
 const blogs = {
     blog: async (id) => {
-        getElbyId("blog-body").innerHTML = renderBlog(await (await fetch(`${baseURL}/blogs/${id}`)).json())
+        const res = await fetch(`${baseURL}/blogs/${id}`);
+        res.ok ? (getElbyId("blog-body").appendChild(renderBlog(await res.json())), hideLoader()) : goTo('/');
     },
     loadAll: async () => {
-        getElbyId('container').innerHTML = [...await (await fetch(`${baseURL}/blogs`)).json()]
+        [...await (await fetch(`${baseURL}/blogs`)).json()]
             .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-            .map(x => blogBoxTemplate(x)).join('');
+            .map(x => getElbyId('container').appendChild(blogBoxTemplate(x)));
     },
     userBlogs: async () => {
-        getElbyId('blogs-section').innerHTML = [...await (await fetch(`${baseURL}/blogs`)).json()]
+        const [allBlogs, users] = await Promise.all([
+            fetch(`${baseURL}/blogs`).then(res => res.json()),
+            fetch(`${baseURL}/users`).then(res => res.json())
+        ]);
+        getElbyId('blogs-section').innerHTML = '';
+        allBlogs.filter(b => b.author === localStorage.getItem('user'))
             .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-            .filter(blog => blog.author === localStorage.getItem('user'))
-            .map(x => renderUserBlog(x)).join('');
-        getElbyId('top-section').innerHTML = renderUserInfo([...await (await fetch(`${baseURL}/users`)).json()]
-            .find(x => x.fullname === localStorage.getItem('user')) ? [...await (await fetch(`${baseURL}/users`)).json()]
-                .find(x => x.fullname === localStorage.getItem('user')) : goTo('/auth/'));
+            .forEach(x => getElbyId('blogs-section').appendChild(renderUserBlog(x)));
+        const userInfo = users.find(x => x.fullname === localStorage.getItem('user'));
+        getElbyId('top-section').prepend(userInfo ? renderUserInfo(userInfo) : goTo('/auth/'));
     },
     create: async () => {
         await fetch(`${baseURL}/blogs`, {
@@ -82,10 +86,10 @@ const blogs = {
                 content: getElbyId("blogContent").value.split('\n')
                     .map(l => {
                         l = l.trim();
-                        if (!l) return null;
-                        if (l.startsWith('# ')) return { type: "heading", level: 1, text: l.substring(2) };
-                        if (l.startsWith('## ')) return { type: "heading", level: 2, text: l.substring(3) };
-                        return { type: "paragraph", text: l };
+                        return !l ? null :
+                            l.startsWith('# ') ? { type: "heading", level: 1, text: l.slice(2) } :
+                                l.startsWith('## ') ? { type: "heading", level: 2, text: l.slice(3) } :
+                                    { type: "paragraph", text: l };
                     }).filter(Boolean)
             })
         }).then(res => { if (res.ok) goTo('/') })
@@ -93,16 +97,10 @@ const blogs = {
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
-    getElbyId('container') &&
-        await blogs.loadAll().then(() => hideLoader())
-    getElbyId("saveBlogBtn") &&
-        getElbyId("saveBlogBtn").addEventListener('click', async () => await blogs.create())
-    getElbyId("blog-body") &&
-        await blogs.blog(new URLSearchParams(window.location.search).get('q'))
-            .then(() => hideLoader())
-    getElbyId('blogs-section') &&
-        await blogs.userBlogs().then(() => hideLoader())
-    getElbyId('edit-blog') &&
-        await blogs.renderEdit(new URLSearchParams(window.location.search).get('id'),
-            () => hideLoader())
-})
+    const params = new URLSearchParams(window.location.search);
+    getElbyId('container') && await blogs.loadAll().then(hideLoader);
+    getElbyId("saveBlogBtn")?.addEventListener('click', async () => await blogs.create());
+    getElbyId("blog-body") && await blogs.blog(params.get('q'));
+    getElbyId('blogs-section') && await blogs.userBlogs().then(hideLoader);
+    getElbyId('edit-blog') && await blogs.renderEdit(params.get('id'), hideLoader);
+});

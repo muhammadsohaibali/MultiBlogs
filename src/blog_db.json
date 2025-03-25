@@ -291,42 +291,42 @@
     {
       "id": "7",
       "author": "Sohaib Ali",
-      "title": "Gwadar - The Emerging Port City",
+      "title": "2 - The Serenity of Hunza Valley",
       "date": "March 23, 2025",
-      "timestamp": "2025-03-22T13:05:50.789Z",
-      "mainText": "Gwadar is Pakistan's rising star, blending strategic importance with scenic coastal beauty.",
+      "timestamp": "2025-03-22T09:15:30.123Z",
+      "mainText": "Nestled among the mighty Karakoram ranges, Hunza Valley is a paradise for nature lovers and adventurers alike.",
       "content": [
         {
           "type": "heading",
           "level": 1,
-          "text": "A City on the Rise"
+          "text": "A Northern Jewel"
         },
         {
           "type": "heading",
           "level": 2,
-          "text": "CPEC’s Backbone"
+          "text": "Landscapes That Mesmerize"
         },
         {
           "type": "paragraph",
-          "text": "Gwadar Port is transforming into a regional trade hub, thanks to the China-Pakistan Economic Corridor (CPEC)."
+          "text": "Snow-capped peaks, emerald lakes, and lush green terraces make Hunza a feast for the eyes and soul."
         },
         {
           "type": "heading",
           "level": 2,
-          "text": "Beaches and Marine Life"
+          "text": "Rich Culture and History"
         },
         {
           "type": "paragraph",
-          "text": "The untouched beaches of Gwadar offer glimpses of dolphins, rare fish, and tranquil sunsets."
+          "text": "Baltit Fort and Altit Fort reflect the ancient heritage of Hunza, standing tall with stories of the past."
         },
         {
           "type": "heading",
           "level": 2,
-          "text": "Local Charm"
+          "text": "Local Delights"
         },
         {
           "type": "paragraph",
-          "text": "Fishermen, handicrafts, and Balochi traditions make Gwadar culturally rich beyond its economic prospects."
+          "text": "The valley's apricots, walnut cakes, and yak meat dishes are a must-try for every visitor."
         }
       ]
     }

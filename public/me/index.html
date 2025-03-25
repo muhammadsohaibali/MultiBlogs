@@ -13,12 +13,10 @@
 </head>
 
 <body>
-    <!-- Loader -->
     <div id="loader-overlay" class="loader-overlay">
         <span class="loader"></span>
     </div>
 
-    <!-- Navbar -->
     <header class="header-div">
         <div class="container nav-container">
             <div class="logo-container" onclick="window.location.href = `/`" style="cursor: pointer;">
@@ -37,17 +35,15 @@
     </header>
 
     <div class="container">
-        <!-- Top Section -->
         <div class="top-section" id="top-section">
+            <button onclick='auth.logout()' class="logout-btn">Switch Account</button>
         </div>
 
-        <!-- Blog Cards Section -->
         <div id="blogs-section" class="blogs-section">
             <!-- Add more blog cards as needed -->
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>© 2025 MultiBlogs. All rights reserved.</p>

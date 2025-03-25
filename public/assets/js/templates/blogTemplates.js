@@ -4,92 +4,127 @@ const ts = (strg, len = 80) => {
     return strg;
 }
 
-const showConfirm = (message, onConfirm, onCancel) => {
-    const box = document.createElement('div');
+function showConfirm(message, onConfirm, onCancel) {
+    var box = document.createElement('div');
     box.className = 'confirm-overlay';
-    box.innerHTML = `
-        <div class="confirm-box">
-            <p>${message}</p>
-            <div class="confirm-actions">
-                <button class="confirm-btn">Yes</button>
-                <button class="cancel-btn">No</button>
-            </div>
-        </div>`;
+    var confirmBox = document.createElement('div');
+    confirmBox.className = 'confirm-box';
+    var text = document.createElement('p');
+    text.innerHTML = message;
+    var actions = document.createElement('div');
+    actions.className = 'confirm-actions';
+    var yesBtn = document.createElement('button');
+    yesBtn.className = 'confirm-btn';
+    yesBtn.appendChild(document.createTextNode('Yes'));
+    var noBtn = document.createElement('button');
+    noBtn.className = 'cancel-btn';
+    noBtn.appendChild(document.createTextNode('No'));
+    yesBtn.onclick = function () { onConfirm(); box.remove(); };
+    noBtn.onclick = function () { if (onCancel) onCancel(); box.remove(); };
+    actions.appendChild(yesBtn);
+    actions.appendChild(noBtn);
+    confirmBox.appendChild(text);
+    confirmBox.appendChild(actions);
+    box.appendChild(confirmBox);
     document.body.appendChild(box);
-    box.querySelector('.confirm-btn').onclick = () => { onConfirm(); box.remove(); };
-    box.querySelector('.cancel-btn').onclick = () => { if (onCancel) onCancel(); box.remove(); };
-};
+}
 
 // Templates
-const blogBoxTemplate = (blog) => {
-    return `
-    <div class="blog-card">
-        <div class="blog-header">
-            <div>
-                <h4>${blog.author}</h4>
-                <span>${blog.date}</span>
-            </div>
-        </div>
-        <h2>${blog.title}</h2>
-        <p>${ts(blog.mainText)}</p>
-        <a href="/blog/?q=${blog.id}">Read more →</a>
-    </div>`;
+function blogBoxTemplate(blog) {
+    var card = document.createElement('div');
+    card.className = 'blog-card';
+    var header = document.createElement('div');
+    header.className = 'blog-header';
+    var headerContent = document.createElement('div');
+    var author = document.createElement('h4');
+    author.appendChild(document.createTextNode(blog.author));
+    var date = document.createElement('span');
+    date.appendChild(document.createTextNode(blog.date));
+    headerContent.appendChild(author);
+    headerContent.appendChild(date);
+    header.appendChild(headerContent);
+    var title = document.createElement('h2');
+    title.appendChild(document.createTextNode(blog.title));
+    var text = document.createElement('p');
+    text.appendChild(document.createTextNode(ts(blog.mainText)));
+    var link = document.createElement('a');
+    link.href = `/blog/?q=${blog.id}`;
+    link.appendChild(document.createTextNode('Read more →'));
+    card.appendChild(header);
+    card.appendChild(title);
+    card.appendChild(text);
+    card.appendChild(link);
+    return card;
 }
 
-const renderBlog = (blog) => {
-    return `
-        <article class="blog-post">
-            <header class="post-header">
-                <h1 class="post-title">${blog.title}</h1>
-                <div class="blog-meta">
-                    <div class="author">${blog.author}</div>
-                    <div class="date">${blog.date}</div>
-                </div>
-            </header>
-        <div class="post-content">
-    ${blog.content.map(item => {
-        if (item.type === 'heading' && item.level === 1) return `<h2>${item.text}</h2>`;
-        if (item.type === 'heading' && item.level === 2) return `<h3>${item.text}</h3>`;
-        if (item.type === 'paragraph') return `<p>${item.text}</p>`;
-        return '';
-    }).join('')}
-        </div>
-        </article>`;
+function renderBlog(blog) {
+    var article = document.createElement('article');
+    article.className = 'blog-post';
+    var header = document.createElement('header');
+    header.className = 'post-header';
+    var title = document.createElement('h1');
+    title.className = 'post-title';
+    title.appendChild(document.createTextNode(blog.title));
+    var meta = document.createElement('div');
+    meta.className = 'blog-meta';
+    var author = document.createElement('div');
+    author.className = 'author';
+    author.appendChild(document.createTextNode(blog.author));
+    var date = document.createElement('div');
+    date.className = 'date';
+    date.appendChild(document.createTextNode(blog.date));
+    meta.appendChild(author);
+    meta.appendChild(date);
+    header.appendChild(title);
+    header.appendChild(meta);
+    var content = document.createElement('div');
+    content.className = 'post-content';
+    blog.content.forEach(function (item) {
+        var element;
+        if (item.type === 'heading' && item.level === 1) element = document.createElement('h2');
+        else if (item.type === 'heading' && item.level === 2) element = document.createElement('h3');
+        else if (item.type === 'paragraph') element = document.createElement('p');
+        if (element) {
+            element.appendChild(document.createTextNode(item.text));
+            content.appendChild(element);
+        }
+    });
+    article.appendChild(header);
+    article.appendChild(content);
+    return article;
 }
 
-const renderUserBlog = (blog) => {
-    return `
-        <article class="blog-post">
-            <header class="post-header">
-                <h1 class="post-title">${blog.title}</h1>
-                <div class="blog-meta">
-                    <div class="author">${blog.author}</div>
-                    <div class="date">${blog.date}</div>
-                </div>
-            </header>
-            <div class="post-content">
-                ${blog.content.map(item => {
-        if (item.type === 'heading' && item.level === 1) return `<h2>${item.text}</h2>`;
-        if (item.type === 'heading' && item.level === 2) return `<h3>${item.text}</h3>`;
-        if (item.type === 'paragraph') return `<p>${item.text}</p>`;
-        return '';
-    }).join('')}
-            </div>
-            <div class="post-actions">
-                <button onclick='window.location.href = "/blog/edit/?id=${blog.id}"' class="edit-btn" data-id="${blog.id}">Edit Blog</button>
-                <button onclick='blogs.delete("${blog.id}" ,"${blog.title}")' class="delete-btn" data-id="${blog.id}">Delete Blog</button>
-            </div>
-        </article>
-    `;
-};
+function renderUserBlog(blog) {
+    var article = renderBlog(blog);
+    var actions = document.createElement('div');
+    actions.className = 'post-actions';
+    var editBtn = document.createElement('button');
+    editBtn.className = 'edit-btn';
+    editBtn.setAttribute('data-id', blog.id);
+    editBtn.textContent = 'Edit Blog';
+    editBtn.onclick = function () { goTo(`/blog/edit/?id=${blog.id}`) };
+    var deleteBtn = document.createElement('button');
+    deleteBtn.className = 'delete-btn';
+    deleteBtn.setAttribute('data-id', blog.id);
+    deleteBtn.textContent = 'Delete Blog';
+    deleteBtn.onclick = () => { blogs.delete(blog.id, blog.title); };
+    actions.appendChild(editBtn);
+    actions.appendChild(deleteBtn);
+    article.appendChild(actions);
+    return article;
+}
 
-const renderUserInfo = (user) => {
-    return `
-        <div class="user-info">
-            <h1>${user.fullname}</h1>
-            <p>Username: ${user.username}</p>
-            <p>User ID: ${user.id}</p>
-        </div>
-        <button onclick='auth.logout()' class="logout-btn">Switch Account</button>
-    `;
-};
+function renderUserInfo(user) {
+    var userInfo = document.createElement('div');
+    userInfo.className = 'user-info';
+    var name = document.createElement('h1');
+    name.appendChild(document.createTextNode(user.fullname));
+    var username = document.createElement('p');
+    username.appendChild(document.createTextNode(`Username: ${user.username}`));
+    var userId = document.createElement('p');
+    userId.appendChild(document.createTextNode(`User ID: ${user.id}`));
+    userInfo.appendChild(name);
+    userInfo.appendChild(username);
+    userInfo.appendChild(userId);
+    return userInfo;
+}
