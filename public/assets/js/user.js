@@ -1,12 +1,13 @@
 const [goTo, getElbyId] = [(path) => window.location.href = path, (id) => document.getElementById(id)];
 const baseURL = ['localhost', '192.168.100.4'].includes(window.location.hostname) ? 'http://192.168.100.4:3000' : '/api';
+const [l, cl, hideLoader] = [localStorage, console, () => getElbyId('loader-overlay').style.display = 'none']
 
 const handleAuth = (event) => {
     event.preventDefault();
     var [submitBtn, user, pass] = [document.getElementById("submit"), getElbyId('username').value, getElbyId('password').value];
     submitBtn.dataset.auth === 'login' ? auth.login(user, pass)
         : submitBtn.dataset.auth === 'register' ? auth.register(user, pass, getElbyId('fullname').value)
-            : console.error("Internal Error");
+            : cl.error("Internal Error");
 }
 
 const auth = {
@@ -20,7 +21,7 @@ const auth = {
         const userData = users.find(res => res.username === user.toLowerCase().trim());
         if (!userData) return userInp.focus(), userInp.value = '', userInp.placeholder = 'User Not Found';
         if (userData.password !== pass) return passInp.focus(), passInp.value = '', passInp.placeholder = 'Incorrect Password';
-        localStorage.setItem('user', userData.fullname);
+        l.setItem('user', userData.fullname);
         goTo('/');
     },
     register: async (user, pass, fullname) => {
@@ -39,10 +40,10 @@ const auth = {
             body: JSON.stringify({ id: newId, username: user.trim(), password: pass.trim(), fullname: fullname.trim() })
         });
         if (!res.ok) return userInp.value = '', userInp.placeholder = 'Internal Server Error';
-        localStorage.setItem('user', fullname.trim());
+        l.setItem('user', fullname.trim());
         goTo("/");
     },
-    logout: () => { localStorage.removeItem('user'); goTo('/') }
+    logout: () => { l.removeItem('user'); goTo('/') }
 }
 
 document.getElementById("submit") &&

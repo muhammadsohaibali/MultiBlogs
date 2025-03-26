@@ -1,7 +1,5 @@
-if (!localStorage.getItem('user')) location.href = '/auth'
-else getElbyId('welcome-text').innerHTML = localStorage.getItem('user');
-
-const hideLoader = () => getElbyId('loader-overlay').style.display = 'none';
+if (!l.getItem('user')) location.href = '/auth'
+else getElbyId('welcome-text').innerHTML = l.getItem('user');
 
 function cap(str) {
     return str.split(' ').map(word => {
@@ -25,10 +23,10 @@ const blogs = {
             fetch(`${baseURL}/users`).then(res => res.json())
         ]);
         getElbyId('blogs-section').innerHTML = '';
-        allBlogs.filter(b => b.author === localStorage.getItem('user'))
+        allBlogs.filter(b => b.author === l.getItem('user'))
             .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
             .forEach(x => getElbyId('blogs-section').appendChild(renderUserBlog(x)));
-        const userInfo = users.find(x => x.fullname === localStorage.getItem('user'));
+        const userInfo = users.find(x => x.fullname === l.getItem('user'));
         getElbyId('top-section').prepend(userInfo ? renderUserInfo(userInfo) : goTo('/auth/'));
     },
     create: async () => {
@@ -37,7 +35,7 @@ const blogs = {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 id: `${parseInt([...await (await fetch(`${baseURL}/blogs`)).json()].at(-1).id) + 1}` || '1',
-                author: cap(localStorage.getItem('user')),
+                author: cap(l.getItem('user')),
                 title: getElbyId('title').value,
                 date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
                 timestamp: new Date().toISOString(),
@@ -61,8 +59,8 @@ const blogs = {
         })
     },
     renderEdit: async (id, callbackc) => {
-        if (!localStorage.getItem('user') || ![...await (await fetch(`${baseURL}/blogs`)).json()]
-            .filter(x => x.author === localStorage.getItem('user') && x.id === id).length) goTo('/');
+        if (!l.getItem('user') || ![...await (await fetch(`${baseURL}/blogs`)).json()]
+            .filter(x => x.author === l.getItem('user') && x.id === id).length) goTo('/');
         getElbyId('edit-blog').dataset.id = id;
         fetch(`${baseURL}/blogs/${id}`)
             .then(res => res.json())
